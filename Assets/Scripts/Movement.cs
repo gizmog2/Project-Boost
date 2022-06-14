@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    Rigidbody myRigidbody;
     // Start is called before the first frame update
     void Start()
     {
-        
+        myRigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -34,7 +35,7 @@ public class Movement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            Debug.Log("Spase is pressed.");
+            myRigidbody.AddRelativeForce(Vector3.up);
         }
         
         
