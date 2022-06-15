@@ -318,7 +318,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebceffa406a8c3a44852eed2d4bc7c8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Forse: 700
+  flyForse: 700
+  rotateForse: 100
 --- !u!54 &1292147112
 Rigidbody:
   m_ObjectHideFlags: 0

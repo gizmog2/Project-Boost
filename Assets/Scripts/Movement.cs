@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    [SerializeField] float Forse = 1f;
+    [SerializeField] float flyForse = 1f;
+    [SerializeField] float rotateForse = 100f;
     Rigidbody myRigidbody;
     // Start is called before the first frame update
     void Start()
@@ -24,19 +25,24 @@ public class Movement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.A))
         {
-            Debug.Log("Rotate left");
+            RotationRocket(rotateForse);
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            Debug.Log("Rotate right");
+            RotationRocket(-rotateForse);
         }
+    }
+
+    private void RotationRocket(float rotationSide)
+    {
+        transform.Rotate(Vector3.forward * rotationSide * Time.deltaTime);
     }
 
     private void ProcessTrust()
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            myRigidbody.AddRelativeForce(Vector3.up * Forse * Time.deltaTime);
+            myRigidbody.AddRelativeForce(Vector3.up * flyForse * Time.deltaTime);
         }
         
         
