@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    [SerializeField] float Forse = 1f;
     Rigidbody myRigidbody;
     // Start is called before the first frame update
     void Start()
@@ -35,7 +36,7 @@ public class Movement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            myRigidbody.AddRelativeForce(Vector3.up);
+            myRigidbody.AddRelativeForce(Vector3.up * Forse * Time.deltaTime);
         }
         
         
