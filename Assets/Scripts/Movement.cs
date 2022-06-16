@@ -7,12 +7,19 @@ public class Movement : MonoBehaviour
 {
     [SerializeField] float flyForse = 1f;
     [SerializeField] float rotateForse = 100f;
+    //[SerializeField] Rigidbody freezConstrain;
     Rigidbody myRigidbody;
     // Start is called before the first frame update
     void Start()
     {
+        //FreezRotation(true);
         myRigidbody = GetComponent<Rigidbody>();
     }
+
+    /*bool FreezRotation(bool result)
+    {
+        return freezConstrain.freezeRotation = result;
+    }*/
 
     // Update is called once per frame
     void Update()
@@ -35,7 +42,9 @@ public class Movement : MonoBehaviour
 
     private void RotationRocket(float rotationSide)
     {
+        myRigidbody.freezeRotation = true;
         transform.Rotate(Vector3.forward * rotationSide * Time.deltaTime);
+        myRigidbody.freezeRotation = false;
     }
 
     private void ProcessTrust()
