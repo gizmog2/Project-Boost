@@ -9,11 +9,16 @@ public class Movement : MonoBehaviour
     [SerializeField] float rotateForse = 100f;
     //[SerializeField] Rigidbody freezConstrain;
     Rigidbody myRigidbody;
+    AudioSource myAudioSource;
+
+    
     // Start is called before the first frame update
     void Start()
     {
         //FreezRotation(true);
         myRigidbody = GetComponent<Rigidbody>();
+        myAudioSource = GetComponent<AudioSource>();
+        
     }
 
     /*bool FreezRotation(bool result)
@@ -52,6 +57,16 @@ public class Movement : MonoBehaviour
         if (Input.GetKey(KeyCode.Space))
         {
             myRigidbody.AddRelativeForce(Vector3.up * flyForse * Time.deltaTime);
+            if (!myAudioSource.isPlaying)
+            {
+                myAudioSource.Play();
+            }
+            
+            
+        }
+        else
+        {
+            myAudioSource.Stop();
         }
         
         
