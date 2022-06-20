@@ -234,6 +234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b86d704c98da6042929a9da98fd9a43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeDelay: 1
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -624,6 +625,10 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 89b0bcd668bd43946b27f5ccca54b03c, type: 3}
+    - target: {fileID: 3734684057745139905, guid: af6c46b6d8ad998489e78bcdd145c29d, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5493155438658713651, guid: af6c46b6d8ad998489e78bcdd145c29d, type: 3}
       propertyPath: m_Name
       value: Rocket
