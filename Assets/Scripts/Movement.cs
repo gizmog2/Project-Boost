@@ -9,8 +9,11 @@ public class Movement : MonoBehaviour
     [SerializeField] float rotateForse = 100f;
     [SerializeField] AudioClip mainEngine;
     //[SerializeField] Rigidbody freezConstrain;
+
     Rigidbody myRigidbody;
     AudioSource myAudioSource;
+
+    bool isAlive = true;
 
     
     // Start is called before the first frame update

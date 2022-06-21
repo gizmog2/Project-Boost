@@ -12,6 +12,8 @@ public class CollisionHandler : MonoBehaviour
 
     AudioSource myAudioSource;
 
+    bool isTransition = true;
+
     private void Start()
     {
         myAudioSource = GetComponent<AudioSource>();
@@ -19,8 +21,35 @@ public class CollisionHandler : MonoBehaviour
         Invoke("EnableMovement", 1f);
     }
 
+    /*private void OnCollisionEnter(Collision collision)
+    {
+        if (isTransition)
+        {
+            switch (collision.gameObject.tag)
+            {
+                case "Friendly":
+                    Debug.Log("This is start position");
+                    break;
+                case "Fuel":
+                    Debug.Log("You get fuel");
+                    break;
+                case "Finish":
+                    StartNextLevel();
+                    break;
+                default:
+                    StartCrashSequence();
+                    break;
+            }
+        }
+        
+    }*/
+
     private void OnCollisionEnter(Collision collision)
     {
+        if (!isTransition)
+        {
+            return;
+        }
         switch (collision.gameObject.tag)
         {
             case "Friendly":
@@ -30,15 +59,14 @@ public class CollisionHandler : MonoBehaviour
                 Debug.Log("You get fuel");
                 break;
             case "Finish":
-                StartNextLevel();                
+                StartNextLevel();
                 break;
             default:
-                StartCrashSequence();                
+                StartCrashSequence();
                 break;
         }
     }
 
-    
     void DisableMovement()
     {
         GetComponent<Movement>().enabled = false;
@@ -52,6 +80,8 @@ public class CollisionHandler : MonoBehaviour
     void StartCrashSequence()
     {
         DisableMovement();
+        isTransition = false;
+        myAudioSource.Stop();
         myAudioSource.PlayOneShot(crashSound);
         Invoke("ReloadLevel", timeDelay);        
     }
@@ -59,6 +89,8 @@ public class CollisionHandler : MonoBehaviour
     void StartNextLevel()
     {
         DisableMovement();
+        isTransition = false;
+        myAudioSource.Stop();
         myAudioSource.PlayOneShot(finishSound);
         Invoke("NextLevel", timeDelay);
     }
