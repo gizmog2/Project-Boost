@@ -16,12 +16,31 @@ public class CollisionHandler : MonoBehaviour
     AudioSource myAudioSource;
     
     bool isTransition = true;
+    bool onCollision = true; 
 
     private void Start()
     {
         myAudioSource = GetComponent<AudioSource>();
         DisableMovement();
-        Invoke("EnableMovement", 1f);
+        Invoke("EnableMovement", 1f);        
+    }
+
+    private void Update()
+    {
+        RespondToDebugKeys();
+    }
+
+    private void RespondToDebugKeys()
+    {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            onCollision = !onCollision;
+        }
+
+        else if (Input.GetKeyDown(KeyCode.L))
+        {
+            NextLevel();
+        }
     }
 
     /*private void OnCollisionEnter(Collision collision)
@@ -47,9 +66,10 @@ public class CollisionHandler : MonoBehaviour
         
     }*/
 
-    private void OnCollisionEnter(Collision collision)
+
+    void OnCollisionEnter(Collision collision)
     {
-        if (!isTransition)
+        if (!isTransition || !onCollision)
         {
             return;
         }
@@ -69,6 +89,7 @@ public class CollisionHandler : MonoBehaviour
                 break;
         }
     }
+
 
     void DisableMovement()
     {
