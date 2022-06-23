@@ -44,24 +44,48 @@ public class Movement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.A))
         {
-            RotationRocket(rotateForse);
-            if (!rightBooster.isPlaying)
-            {                
-                rightBooster.Play();
-            }                        
+            RotateLeft();
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            RotationRocket(-rotateForse);
-            if (!leftBooster.isPlaying)
-            {                
-                leftBooster.Play();
-            }                       
+            RotateRight();
         }
         else
         {
             rightBooster.Stop();
             leftBooster.Stop();
+        }
+    }
+    private void ProcessTrust()
+    {
+        if (Input.GetKey(KeyCode.Space))
+        {
+            StartTrusting();
+
+        }
+        else
+        {
+            StopTrusting();
+        }
+
+
+    }
+
+    private void RotateRight()
+    {
+        RotationRocket(-rotateForse);
+        if (!leftBooster.isPlaying)
+        {
+            leftBooster.Play();
+        }
+    }
+
+    private void RotateLeft()
+    {
+        RotationRocket(rotateForse);
+        if (!rightBooster.isPlaying)
+        {
+            rightBooster.Play();
         }
     }
 
@@ -72,25 +96,19 @@ public class Movement : MonoBehaviour
         myRigidbody.freezeRotation = false;
     }
 
-    private void ProcessTrust()
+    private void StartTrusting()
     {
-        if (Input.GetKey(KeyCode.Space))
+        myRigidbody.AddRelativeForce(Vector3.up * flyForse * Time.deltaTime);
+        if (!myAudioSource.isPlaying && !mainBooster.isPlaying)
         {
-            myRigidbody.AddRelativeForce(Vector3.up * flyForse * Time.deltaTime);
-            if (!myAudioSource.isPlaying && !mainBooster.isPlaying)
-            {
-                myAudioSource.PlayOneShot(mainEngine);
-                mainBooster.Play();
-            }
-            
-            
+            myAudioSource.PlayOneShot(mainEngine);
+            mainBooster.Play();
         }
-        else
-        {
-            myAudioSource.Stop();
-            mainBooster.Stop();
-        }
-        
-        
     }
+
+    private void StopTrusting()
+    {
+        myAudioSource.Stop();
+        mainBooster.Stop();
+    }    
 }
