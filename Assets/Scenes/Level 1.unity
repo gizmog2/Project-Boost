@@ -576,7 +576,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementVector: {x: 8, y: 0, z: 0}
-  movementFactor: 0
+  period: 2
 --- !u!1 &307279929
 GameObject:
   m_ObjectHideFlags: 0
